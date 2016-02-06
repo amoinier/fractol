@@ -6,11 +6,11 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 12:13:16 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/05 19:19:38 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/06 17:19:33 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 void			ft_clear_img(t_env *init)
 {
@@ -30,9 +30,6 @@ void			pixel_put_image(t_env *init, int x, int y, int color)
 	bpp = init->img->bpp;
 	sizeline = init->img->sizel;
 	data = init->img->cimg;
-	color = ft_col(init, color);
-	if (init->col > 1000)
-		color = init->col;
 	if (x < init->width && y < init->height && x > 0 && y > 0)
 	{
 		i = x * (bpp / 8) + y * sizeline;

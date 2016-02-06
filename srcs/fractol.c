@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:09:53 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/06 17:40:26 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/06 19:01:39 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,16 @@ static	void	ft_initenv(t_env *init, char *av)
 {
 	init->width = 1000;
 	init->height = 1000;
-	init->iter = 100;
+	init->iter = 50;
 	init->fract = av;
-	init->zoom_x = init->width / (0.6 - (-2.1));
-	init->zoom_y = init->height / (1.2 - -(1.2));
+	init->x1 = -2.1;
+	init->x2 = 0.6;
+	init->y1 = -1.2;
+	init->y2 = 1.2;
+	init->movex = 0;
+	init->movey = 0;
+	init->zoom_x = init->width / (init->x2 - init->x1);
+	init->zoom_y = init->height / (init->y2 - init->y1);
 	init->img = ft_init_img(init);
 }
 
@@ -41,7 +47,7 @@ int				main(int ac, char **av)
 {
 	t_env	*init;
 
-	if (ac == 2)
+	if (ac == 2 && ft_strequ(av[1], "mandelbrot"))
 	{
 		if (!(init = (t_env *)malloc(sizeof(*init))))
 			error();

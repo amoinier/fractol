@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:09:53 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/06 19:34:31 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/07 17:27:25 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static	void	ft_initenv(t_env *init, char *av)
 	init->x2 = 0.6;
 	init->y1 = -1.2;
 	init->y2 = 1.2;
-	init->movex = 0;
-	init->movey = 0;
+	init->movex = init->x1;
+	init->movey = init->y1;
 	init->zoom = 1;
 	init->zoom_x = init->width / (init->x2 - init->x1);
 	init->zoom_y = init->height / (init->y2 - init->y1);

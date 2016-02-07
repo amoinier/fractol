@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:10:31 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/06 18:24:48 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/06 19:31:15 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef	struct	s_env
 	void		*win;
 	int			width;
 	int			height;
+	float		zoom;
 	float 		zoom_x;
 	float		zoom_y;
 	float		movex;

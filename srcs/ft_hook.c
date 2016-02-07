@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/06 19:01:49 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/06 19:36:06 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,19 @@ int				mouse_hook(int button, int x, int y, t_env *init)
 	ft_clear_img(init);
 	if (button == 5)
 	{
+		init->zoom *= 1.1;
 		init->zoom_x += 50;
 		init->zoom_y += 50;
+		init->movex += ((float)x - (init->width / 2)) * 0.00038 / init->zoom;
+		init->movey += ((float)y - (init->height / 2)) * 0.00038 / init->zoom;
 	}
 	if (button == 4)
 	{
+		init->zoom -= 1;
 		init->zoom_x -= 50;
 		init->zoom_y -= 50;
+		init->movex -= (x - (init->width / 2)) * (0.00038 / init->zoom);
+		init->movey -= (y - (init->height / 2)) * (0.00038 / init->zoom);
 	}
 	draw(init);
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
@@ -45,14 +51,6 @@ int				key_hook(int keycode, t_env *init)
 		init->iter += 1;
 	if (keycode == 78)
 		init->iter -= 1;
-	if (keycode == 123)
-		init->x1 -= 0.1;
-	if (keycode == 124)
-		init->x1 += 0.1;
-	if (keycode == 125)
-		init->y1 -= 0.1;
-	if (keycode == 126)
-		init->y1 += 0.1;
 	draw(init);
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
 	return (0);

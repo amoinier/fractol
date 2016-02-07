@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 12:51:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/07 17:40:15 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/07 19:51:02 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void    draw_mandel(t_env *init, int x, int y)
     float tmp;
     float i;
 
-    cr = x / (init->zoom_x) + init->movex;
-    ci = y / (init->zoom_y) + init->movey;
+    cr = x / (init->width / (init->x2 - init->x1)) + init->movex;
+    ci = y / (init->height / (init->y2 - init->y1)) + init->movey;
     zr = 0;
     zi = 0;
     i = 0;
@@ -46,6 +46,9 @@ x 0.0024
 
 ?    = 750
 ?    = 750
+
+init->movex = -2.1 >> 300 .... 500
+
 */
 void    draw(t_env *init)
 {

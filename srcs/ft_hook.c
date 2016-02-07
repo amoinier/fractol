@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/07 17:41:21 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/07 19:39:28 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,19 @@ int				mouse_hook(int button, int x, int y, t_env *init)
 		init->zoom *= 1.1;
 		init->zoom_x += 50 * init->zoom;
 		init->zoom_y += 50 * init->zoom;
-		init->movex = x * (init->x1 / (init->width / 2));
-		init->movey = y * (init->y1 / (init->height / 2));
 	}
 	if (button == 4)
 	{
 		init->zoom_x -= 50 * init->zoom;
 		init->zoom_y -= 50 * init->zoom;
-		init->movex = x * (init->x1 / (init->width / 2));
-		init->movey = y * (init->y1 / (init->height / 2));
 		init->zoom /= 1.1;
 	}
 	if (button == 1)
 	{
-		init->movex = x * (init->x1 / (init->width / 2));
-		init->movey = y * (init->y1 / (init->height / 2));
+		init->movex = init->x1 - ((x) * (init->x1 / (init->width / 2)));
+		init->movey = init->y1 - ((y) * (init->y1 / (init->height / 2)));
 	}
+	printf("%f\n", init->movex);
 	draw(init);
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
 	return (0);
@@ -55,10 +52,8 @@ int				key_hook(int keycode, t_env *init)
 		exit(0);
 	}
 	if (init->iter > 0)
-	{
 		if (keycode == 78)
 			init->iter -= 1;
-	}
 	if (keycode == 69)
 		init->iter += 1;
 	draw(init);

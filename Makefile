@@ -6,7 +6,7 @@
 #    By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 12:02:38 by amoinier          #+#    #+#              #
-#    Updated: 2016/02/05 19:06:12 by amoinier         ###   ########.fr        #
+#    Updated: 2016/02/07 19:54:58 by amoinier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ $(ODIR)%.o: $(SDIR)%.c
 header:
 	@mkdir -p $(ODIR)
 	@echo "${YEL}"
-	@echo "PROJET"
+	@echo "FRACT'OL"
 	@echo "By: amoinier"
 	@echo
 	@echo "${STD}"

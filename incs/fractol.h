@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:10:31 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/08 12:52:46 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/08 17:47:22 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,17 @@ typedef	struct	s_env
 	void		*win;
 	int			width;
 	int			height;
-	float		zoom;
-	float 		zoom_x;
-	float		zoom_y;
-	float		movex;
-	float		movey;
+	double		zoom;
+	double 		zoomval;
+	double		movex;
+	double		movey;
 
     t_img       *img;
 
-	float		x1;
-	float		x2;
-	float		y1;
-	float		y2;
+	double		x1;
+	double		x2;
+	double		y1;
+	double		y2;
 	int			iter;
 	char		*fract;
 }				t_env;

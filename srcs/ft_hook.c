@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/08 13:05:24 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/08 20:14:40 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,17 @@ int				mouse_hook(int button, int x, int y, t_env *init)
 	if (button == 5)
 	{
 		init->zoom *= 1.1;
-		init->movex = 500 - x;
-		init->movey = 500 - y;
-		init->zoom_x += 50 * init->zoom;
-		init->zoom_y += 50 * init->zoom;
+		init->zoomval += 50 * init->zoom;
 	}
 	if (button == 4)
 	{
-		init->zoom_x -= 50 * init->zoom;
-		init->zoom_y -= 50 * init->zoom;
+		init->zoomval -= 50 * init->zoom;
 		init->zoom /= 1.1;
 	}
-	if (button == 1)
-	{
-		//init->movex = ((x) * (init->x1 / (init->width / 2)));
-		//init->movey = ((y) * (init->y1 / (init->height / 2)));
-		init->movex = 500 - x;
-		init->movey = 500 - y;
-	}
-	//printf("%f\n", init->movex);
+	// if (button == 1)
+	// {
+	// 	init->movex += 1;
+	// }
 	draw(init);
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
 	return (0);

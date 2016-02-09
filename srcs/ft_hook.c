@@ -6,36 +6,79 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/08 20:14:40 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/09 17:10:37 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
-#include <math.h>
 
 int				mouse_hook(int button, int x, int y, t_env *init)
 {
-	x *= 1;
-	y *= 1;
+	double tmp;
+	double newx;
+	double newy;
+	double xscal;
+	double yscal;
+
+	newx = x / (init->zoomx / (init->x2 - init->x1)) + init->x1;
+	newy = y / (init->zoomy / (init->y2 - init->y1)) + init->y1;
+	xscal = (init->x2 - init->x1);
+	yscal = (init->y2 - init->y1);
 	ft_clear_img(init);
 	if (button == 5)
 	{
-		init->zoom *= 1.1;
-		init->zoomval += 50 * init->zoom;
+		tmp = init->x1;
+		init->x1 = (newx + (init->x2 + init->x1) / 2) / 2 - (xscal * 0.4);
+		init->x2 = (newx + (init->x2 + tmp) / 2) / 2 + (xscal * 0.4);
+		tmp = init->y1;
+		init->y1 = (newy + (init->y2 + init->y1) / 2) / 2 - (yscal * 0.4);
+		init->y2 = (newy + (init->y2 + tmp) / 2) / 2 + (yscal * 0.4);
 	}
 	if (button == 4)
 	{
-		init->zoomval -= 50 * init->zoom;
-		init->zoom /= 1.1;
+		init->x1 = init->x1 - (xscal * 0.52);
+		init->x2 = init->x2 + (xscal * 0.52);
+		init->y1 = init->y1 - (yscal * 0.52);
+		init->y2 = init->y2 + (yscal * 0.52);
 	}
-	// if (button == 1)
-	// {
-	// 	init->movex += 1;
-	// }
+	if (button == 1 && init->fixjul == 0)
+		init->fixjul = 1;
+	else if (button == 1 && init->fixjul == 1)
+		init->fixjul = 0;
 	draw(init);
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
 	return (0);
+}
+
+int		mouse_julia(int x, int y, t_env *init)
+{
+	if (init->fixjul == 1)
+	{
+		ft_clear_img(init);
+		init->julx = (double)x / (double)(init->width / 2) - 1;
+		init->july = (double)y / (double)(init->height / 2) - 1;
+		draw(init);
+		mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
+	}
+	return (0);
+}
+
+static	void	keycode_col(int keycode, t_env *init)
+{
+	if (keycode == 83)
+		init->col = 777777;
+	if (keycode == 84)
+		init->col = (777777) / 1000;
+	if (keycode == 85)
+		init->col = 9999999;
+	if (keycode == 86)
+		init->col = 7668190;
+	if (keycode == 87)
+		init->col = 46401678;
+	if (keycode == 88)
+		init->col = 137517911;
+	if (keycode == 67)
+		init->col = rand() % 23800176;
 }
 
 int				key_hook(int keycode, t_env *init)
@@ -47,11 +90,14 @@ int				key_hook(int keycode, t_env *init)
 		mlx_destroy_window(init->mlx, init->win);
 		exit(0);
 	}
+	keycode_col(keycode, init);
 	if (init->iter > 0)
 		if (keycode == 78)
-			init->iter -= 1;
+			init->iter -= 10;
 	if (keycode == 69)
-		init->iter += 1;
+		init->iter += 10;
+	if (keycode == 82)
+		init->col = 0;
 	draw(init);
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
 	return (0);

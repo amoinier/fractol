@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:10:31 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/08 17:47:22 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/09 16:57:19 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ typedef	struct	s_env
 	void		*win;
 	int			width;
 	int			height;
-	double		zoom;
-	double 		zoomval;
-	double		movex;
-	double		movey;
+	double 		zoomy;
+	double 		zoomx;
 
     t_img       *img;
 
@@ -42,11 +40,16 @@ typedef	struct	s_env
 	double		x2;
 	double		y1;
 	double		y2;
+	double		col;
+	double		julx;
+	double		july;
+	int			fixjul;
 	int			iter;
 	char		*fract;
 }				t_env;
 
 int				mouse_hook(int button, int x, int y, t_env *init);
+int				mouse_julia(int x, int y, t_env *init);
 int				key_hook(int keycode, t_env *init);
 int				expose_hook(t_env *init);
 

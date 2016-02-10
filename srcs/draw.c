@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 12:51:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/10 18:27:35 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/10 19:44:57 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,38 +68,47 @@ void    draw_julia(t_env *init, int x, int y)
         pixel_put_image(init, x, y, i * init->col);
 }
 
-void    draw_sierp(t_env *init)
+void    draw_sierp(t_env *init, double x, double y)
 {
-    int i;
-    int j;
-    int x;
-    int y;
-    int sx;
-    int sy;
+    double i;
+    double j;
+    double k;
+    double sx;
+    double sy;
 
     i = 0;
-    while (i <= 3)
+    while (i <= init->iter / 10)
     {
-        y = 0;
-        while (y < init->height)
+        j = 1;
+        sx = (init->width / pow(3, i));
+        sy = (init->height / pow(3, i));
+        while (j * sx <= init->width)
         {
-            x = 0;
-            while (x < init->width)
+            k = 1;
+            if (x >= sx * j && x <= sx * (2 + j - 1) && y >= sy && y <= sy * 2)
+                pixel_put_image(init, x, y, i * init->col);
+            else if (x >= sx && x <= sx * 2 && y >= sy * j && y <= sy * (2 + j - 1))
+                pixel_put_image(init, x, y, i * init->col);
+            else if (x >= sx * j && x <= sx * (2 + j - 1) && y <= init->height - sy && y >= init->height - (sy * 2))
+                pixel_put_image(init, x, y, i * init->col);
+            else if (x <= init->width - sx && x >= init->width - sx * 2 && y >= sy * j && y <= sy * (2 + j - 1))
+                pixel_put_image(init, x, y, i * init->col);
+            else
             {
-                j = 1;
-                sx = (init->width / pow(3, i));
-                sy = (init->height / pow(3, i));
-                while (j * sx < init->width)
+                while (k * sx <= init->width)
                 {
-                    if (x > sx && x < sx * 2 && y > sy && y < sy * 2)
+                    if (x >= sx * j && x <= sx * (2 + j - 1) && y * k >= sy && y <= sy * (2 + k - 1))
                         pixel_put_image(init, x, y, i * init->col);
-                    if (x > sx && x < sx * 2 && y > sy && y < sy * 2)
+                    else if (x >= sx * k && x <= sx * (2 + k - 1) && y >= sy * j && y <= sy * (2 + j - 1))
                         pixel_put_image(init, x, y, i * init->col);
-                    j++;
+                    // else if (x >= sx * j && x <= sx * (2 + j - 1) && y <= init->height - sy && y >= init->height - (sy * 2))
+                    //     pixel_put_image(init, x, y, i * init->col);
+                    // else if (x <= init->width - sx && x >= init->width - sx * 2 && y >= sy * j && y <= sy * (2 + j - 1))
+                    //     pixel_put_image(init, x, y, i * init->col);
+                    k = k + 3;
                 }
-                x++;
             }
-            y++;
+            j = j + 3;
         }
         i++;
     }
@@ -112,20 +121,17 @@ void    draw(t_env *init)
 
     i = 0;
     j = 0;
-    if (ft_strequ(init->fract, "other"))
-    {
-        draw_sierp(init);
-        return ;
-    }
-    while (i <= init->zoomx)
+    while (i <= init->width)
     {
         j = 0;
-        while (j <= init->zoomy)
+        while (j <= init->height)
         {
             if (ft_strequ(init->fract, "julia"))
                 draw_julia(init, i, j);
             if (ft_strequ(init->fract, "mandelbrot"))
                 draw_mandel(init, i, j);
+            if (ft_strequ(init->fract, "other"))
+                draw_sierp(init, (double)i, (double)j);
             j++;
         }
         i++;

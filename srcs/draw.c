@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 12:51:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/09 17:52:40 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/10 13:57:43 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void    draw_mandel(t_env *init, int x, int y)
     double tmp;
     double i;
 
-    cr = x / (init->zoomx / (init->x2 - init->x1)) + init->x1;
-    ci = y / (init->zoomy / (init->y2 - init->y1)) + init->y1;
+    cr = x / (init->zoomx / (init->x2 - init->x1)) + init->x1 + init->movex;
+    ci = y / (init->zoomy / (init->y2 - init->y1)) + init->y1 + init->movey;
     zr = 0;
     zi = 0;
     i = 0;
@@ -70,22 +70,25 @@ void    draw_julia(t_env *init, int x, int y)
 
 void    draw_sierp(t_env *init, int x, int y)
 {
+    double  xd;
+    double yd;
     int i;
-    double  rx;
-    double  ry;
+    int xx;
+    int yy;
 
+    x *= 1;
+    y *= 1;
+    xd = init->width;
+    yd = init->height;
     i = 0;
-    rx = x / (init->zoomx / (init->x2 - init->x1)) + init->x1;
-    ry = y / (init->zoomy / (init->y2 - init->y1)) + init->y1;;
-    while (rx < 2 && i < init->iter)
+    xx = 0;
+    yy = 0;
+    while (i < init->iter)
     {
-        rx = (8/9) * rx + ry;
+        xd /= 2;
+        yd /= 2;
         i++;
     }
-    if (i == init->iter)
-        pixel_put_image(init, x, y, 0xffffff);
-    else
-        pixel_put_image(init, x, y, i * init->col);
 }
 
 void    draw(t_env *init)

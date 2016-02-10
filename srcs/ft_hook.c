@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/09 17:10:37 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/10 14:27:23 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int				mouse_hook(int button, int x, int y, t_env *init)
 		tmp = init->y1;
 		init->y1 = (newy + (init->y2 + init->y1) / 2) / 2 - (yscal * 0.4);
 		init->y2 = (newy + (init->y2 + tmp) / 2) / 2 + (yscal * 0.4);
+		init->zoom += 1;
 	}
 	if (button == 4)
 	{
@@ -40,6 +41,7 @@ int				mouse_hook(int button, int x, int y, t_env *init)
 		init->x2 = init->x2 + (xscal * 0.52);
 		init->y1 = init->y1 - (yscal * 0.52);
 		init->y2 = init->y2 + (yscal * 0.52);
+		init->zoom -= 1;
 	}
 	if (button == 1 && init->fixjul == 0)
 		init->fixjul = 1;
@@ -63,7 +65,7 @@ int		mouse_julia(int x, int y, t_env *init)
 	return (0);
 }
 
-static	void	keycode_col(int keycode, t_env *init)
+static	void	keypadcode_col(int keycode, t_env *init)
 {
 	if (keycode == 83)
 		init->col = 777777;
@@ -79,6 +81,46 @@ static	void	keycode_col(int keycode, t_env *init)
 		init->col = 137517911;
 	if (keycode == 67)
 		init->col = rand() % 23800176;
+	if (keycode == 125)
+		init->movey -= 0.1 / (init->zoom * 2);
+	if (keycode == 126)
+		init->movey += 0.1 / (init->zoom * 2);
+	if (keycode == 123)
+		init->movex += 0.1 / (init->zoom * 2);
+	if (keycode == 124)
+		init->movex -= 0.1 / (init->zoom * 2);
+}
+
+static	void	zoom_keyboard(int keycode, t_env *init)
+{
+	double tmp;
+	double newx;
+	double newy;
+	double xscal;
+	double yscal;
+
+	newx = (init->width / 2) / (init->zoomx / (init->x2 - init->x1)) + init->x1;
+	newy =  (init->height / 2) / (init->zoomy / (init->y2 - init->y1)) + init->y1;
+	xscal = (init->x2 - init->x1);
+	yscal = (init->y2 - init->y1);
+	if (keycode == 116)
+	{
+		tmp = init->x1;
+		init->x1 = (newx + (init->x2 + init->x1) / 2) / 2 - (xscal * 0.4);
+		init->x2 = (newx + (init->x2 + tmp) / 2) / 2 + (xscal * 0.4);
+		tmp = init->y1;
+		init->y1 = (newy + (init->y2 + init->y1) / 2) / 2 - (yscal * 0.4);
+		init->y2 = (newy + (init->y2 + tmp) / 2) / 2 + (yscal * 0.4);
+		init->zoom += 1;
+	}
+	if (keycode == 121)
+	{
+		init->x1 = init->x1 - (xscal * 0.52);
+		init->x2 = init->x2 + (xscal * 0.52);
+		init->y1 = init->y1 - (yscal * 0.52);
+		init->y2 = init->y2 + (yscal * 0.52);
+		init->zoom -= 1;
+	}
 }
 
 int				key_hook(int keycode, t_env *init)
@@ -90,7 +132,8 @@ int				key_hook(int keycode, t_env *init)
 		mlx_destroy_window(init->mlx, init->win);
 		exit(0);
 	}
-	keycode_col(keycode, init);
+	keypadcode_col(keycode, init);
+	zoom_keyboard(keycode, init);
 	if (init->iter > 0)
 		if (keycode == 78)
 			init->iter -= 10;

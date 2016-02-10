@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:09:53 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/09 17:54:35 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/10 14:22:28 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static	void	ft_initenv(t_env *init, char *av)
 	init->col = 0;
 	init->julx = 0;
 	init->july = 0;
+	init->movex = 0;
+	init->movey = 0;
+	init->zoom = 1;
 	init->fixjul = 1;
 	init->img = ft_init_img(init);
 }
@@ -68,8 +71,10 @@ int				main(int ac, char **av)
 			mlx_expose_hook(init->win, expose_hook, init);
 			mlx_loop(init->mlx);
 		}
+		else
+			ft_putstr("USAGE : mandelbrot - julia - other\n");
 	}
 	else
-		error();
+		ft_putstr("USAGE : 1 param\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/10 14:27:23 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/10 18:13:57 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int		mouse_julia(int x, int y, t_env *init)
 
 static	void	keypadcode_col(int keycode, t_env *init)
 {
+	if (keycode == 82)
+		init->col = 0xffffff + 33333333;
 	if (keycode == 83)
 		init->col = 777777;
 	if (keycode == 84)
@@ -132,15 +134,14 @@ int				key_hook(int keycode, t_env *init)
 		mlx_destroy_window(init->mlx, init->win);
 		exit(0);
 	}
-	keypadcode_col(keycode, init);
+	if (keycode > 66)
+		keypadcode_col(keycode, init);
 	zoom_keyboard(keycode, init);
 	if (init->iter > 0)
 		if (keycode == 78)
 			init->iter -= 10;
 	if (keycode == 69)
 		init->iter += 10;
-	if (keycode == 82)
-		init->col = 0;
 	draw(init);
 	mlx_put_image_to_window(init->mlx, init->win, init->img->img, 0, 0);
 	return (0);

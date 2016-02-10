@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 12:51:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/10 13:57:43 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/10 18:27:35 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,39 @@ void    draw_julia(t_env *init, int x, int y)
         pixel_put_image(init, x, y, i * init->col);
 }
 
-void    draw_sierp(t_env *init, int x, int y)
+void    draw_sierp(t_env *init)
 {
-    double  xd;
-    double yd;
     int i;
-    int xx;
-    int yy;
+    int j;
+    int x;
+    int y;
+    int sx;
+    int sy;
 
-    x *= 1;
-    y *= 1;
-    xd = init->width;
-    yd = init->height;
     i = 0;
-    xx = 0;
-    yy = 0;
-    while (i < init->iter)
+    while (i <= 3)
     {
-        xd /= 2;
-        yd /= 2;
+        y = 0;
+        while (y < init->height)
+        {
+            x = 0;
+            while (x < init->width)
+            {
+                j = 1;
+                sx = (init->width / pow(3, i));
+                sy = (init->height / pow(3, i));
+                while (j * sx < init->width)
+                {
+                    if (x > sx && x < sx * 2 && y > sy && y < sy * 2)
+                        pixel_put_image(init, x, y, i * init->col);
+                    if (x > sx && x < sx * 2 && y > sy && y < sy * 2)
+                        pixel_put_image(init, x, y, i * init->col);
+                    j++;
+                }
+                x++;
+            }
+            y++;
+        }
         i++;
     }
 }
@@ -97,6 +111,12 @@ void    draw(t_env *init)
     int j;
 
     i = 0;
+    j = 0;
+    if (ft_strequ(init->fract, "other"))
+    {
+        draw_sierp(init);
+        return ;
+    }
     while (i <= init->zoomx)
     {
         j = 0;
@@ -106,8 +126,6 @@ void    draw(t_env *init)
                 draw_julia(init, i, j);
             if (ft_strequ(init->fract, "mandelbrot"))
                 draw_mandel(init, i, j);
-            if (ft_strequ(init->fract, "other"))
-                draw_sierp(init, i, j);
             j++;
         }
         i++;

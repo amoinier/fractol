@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 18:15:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 20:25:46 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/12 20:27:38 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void			zoom(t_env *init, int button, int x, int y)
 	if (button == 4 || button == 121)
 	{
 		zoomless(init, scal);
-		init->zoom /= 1.05;
+		init->zoom /= 1.25;
 	}
 }
 

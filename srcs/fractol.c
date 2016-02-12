@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:09:53 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 17:35:52 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/12 20:04:39 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	void	ft_initenv(t_env *init, char *av)
 	init->zoomy = (init->y2 - init->y1) * 200;
 	init->width = init->zoomx;
 	init->height = init->zoomy;
-	if (ft_strequ(av, "other"))
+	if (ft_strequ(av, "sierp"))
 	{
 		init->width = 800;
 		init->height = 800;
@@ -48,15 +48,15 @@ static	void	ft_initenv(t_env *init, char *av)
 	init->july = 0;
 	init->movex = 0;
 	init->movey = 0;
-	init->zoom = 1;
-	init->fixjul = 1;
+	init->zoom = 10.00000000;
+	init->fixjul = 0;
 	init->img = ft_init_img(init);
 }
 
 int				control_param(char *av)
 {
-	if (ft_strequ(av, "mandelbrot") || ft_strequ(av, "julia") ||
-	ft_strequ(av, "other") || ft_strequ(av, "fakenewton") ||
+	if (ft_strequ(av, "mandel") || ft_strequ(av, "julia") ||
+	ft_strequ(av, "sierp") || ft_strequ(av, "douady") ||
 	ft_strequ(av, "burning"))
 		return (1);
 	else
@@ -85,7 +85,7 @@ int				main(int ac, char **av)
 			mlx_loop(init->mlx);
 		}
 		else
-			ft_putstr("USAGE : mandelbrot - julia - fakenewton - other\n");
+			ft_putstr("USAGE : mandel - julia - douady - burning - sierp\n");
 	}
 	else
 		ft_putstr("USAGE : 1 param\n");

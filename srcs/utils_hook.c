@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 18:15:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 18:26:20 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/12 20:25:46 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ void			zoom(t_env *init, int button, int x, int y)
 		tmp = init->y1;
 		init->y1 = (newy + (init->y2 + init->y1) / 2) / 2 - (scal[1] * 0.4);
 		init->y2 = (newy + (init->y2 + tmp) / 2) / 2 + (scal[1] * 0.4);
-		init->zoom *= 1.4;
+		init->zoom *= 1.25;
 	}
 	if (button == 4 || button == 121)
 	{
 		zoomless(init, scal);
-		init->zoom /= 1.52;
+		init->zoom /= 1.05;
 	}
 }
+
+#include <stdio.h>
 
 void			keypadcode_col(int keycode, t_env *init)
 {
@@ -67,11 +69,12 @@ void			keypadcode_col(int keycode, t_env *init)
 	if (keycode == 67)
 		init->col = rand() % 23800176;
 	if (keycode == 125)
-		init->movey -= 0.01 / init->zoom;
+		init->movey -= 1.0000000000000 / init->zoom;
 	if (keycode == 126)
-		init->movey += 0.01 / init->zoom;
+		init->movey += 1.0000000000000 / init->zoom;
 	if (keycode == 123)
-		init->movex += 0.01 / init->zoom;
+		init->movex += 1.0000000000000 / init->zoom;
 	if (keycode == 124)
-		init->movex -= 0.01 / init->zoom;
+		init->movex -= 1.0000000000000 / init->zoom;
+    printf("%f\n", init->movex);
 }

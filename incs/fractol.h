@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:10:31 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 18:38:03 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/12 20:06:24 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef	struct	s_env
 	void		*win;
 	int			width;
 	int			height;
-	int			zoom;
+	double			zoom;
 	double		cr;
 	double		ci;
 	double		zr;
@@ -69,6 +69,7 @@ void			pixel_put_image(t_env *init, int x, int y, int color);
 void			ft_clear_img(t_env *init);
 
 void    		draw(t_env *init);
+void			ft_str_win(t_env *init);
 
 int             error(void);
 

@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 18:16:44 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/12 18:21:57 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				mouse_hook(int button, int x, int y, t_env *init)
 	return (0);
 }
 
-int		mouse_julia(int x, int y, t_env *init)
+int				mouse_julia(int x, int y, t_env *init)
 {
 	if (init->fixjul == 1)
 	{
@@ -62,6 +62,6 @@ int				key_hook(int keycode, t_env *init)
 
 int				expose_hook(t_env *init)
 {
-	init->height *= 1;
+	draw(init);
 	return (0);
 }

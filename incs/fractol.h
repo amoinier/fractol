@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:10:31 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/10 14:22:18 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/12 18:16:35 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int				mouse_hook(int button, int x, int y, t_env *init);
 int				mouse_julia(int x, int y, t_env *init);
 int				key_hook(int keycode, t_env *init);
 int				expose_hook(t_env *init);
+void			keypadcode_col(int keycode, t_env *init);
+void			zoom(t_env *init, int button, int x, int y);
 
 void			pixel_put_image(t_env *init, int x, int y, int color);
 void			ft_clear_img(t_env *init);

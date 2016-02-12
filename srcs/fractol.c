@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:09:53 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/11 19:28:43 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/12 17:35:52 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static	void	ft_initenv(t_env *init, char *av)
 int				control_param(char *av)
 {
 	if (ft_strequ(av, "mandelbrot") || ft_strequ(av, "julia") ||
-	ft_strequ(av, "other") || ft_strequ(av, "newton") ||
+	ft_strequ(av, "other") || ft_strequ(av, "fakenewton") ||
 	ft_strequ(av, "burning"))
 		return (1);
 	else

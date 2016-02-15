@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:10:31 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 20:06:24 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/15 19:10:18 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ typedef	struct	s_env
 	double		ci;
 	double		zr;
 	double		zi;
-	double 		zoomy;
-	double 		zoomx;
 
     t_img       *img;
 

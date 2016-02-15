@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:09:53 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 20:04:39 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/15 20:07:50 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,20 @@ static	t_img	*ft_init_img(t_env *init)
 static	void	ft_initenv(t_env *init, char *av)
 {
 	init->fract = av;
-	init->x1 = -2.1;
+	init->x1 = -1.5;
 	init->x2 = 1.5;
-	init->y1 = -1.2;
-	init->y2 = 1.2;
-	init->zoomx = (init->x2 - init->x1) * 200;
-	init->zoomy = (init->y2 - init->y1) * 200;
-	init->width = init->zoomx;
-	init->height = init->zoomy;
-	if (ft_strequ(av, "sierp"))
-	{
-		init->width = 800;
-		init->height = 800;
-	}
+	init->y1 = -1.5;
+	init->y2 = 1.5;
+	init->width = (init->x2 - init->x1) * 200;
+	init->height = (init->y2 - init->y1) * 200;
 	init->iter = 30;
-	init->col = 0xffffff + 33333333;
 	init->julx = 0;
 	init->july = 0;
 	init->movex = 0;
 	init->movey = 0;
-	init->zoom = 10.00000000;
+	init->zoom = 1;
 	init->fixjul = 0;
+	init->col = 0xfff0ff;
 	init->img = ft_init_img(init);
 }
 

@@ -6,11 +6,12 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:02:13 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 19:40:07 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/15 20:07:32 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <math.h>
 
 void	ft_str_win(t_env *init)
 {
@@ -20,7 +21,7 @@ void	ft_str_win(t_env *init)
 	mlx_string_put(init->mlx, init->win, 205, 25, 0xffffff, init->fract);
 	mlx_string_put(init->mlx, init->win, 10, 45, 0xffffff, "Zoom :");
 	mlx_string_put(init->mlx, init->win, 75, 45, 0xffffff,
-		ft_itoa(init->zoom * 100));
+		ft_itoa(sqrt(init->zoom) / 1.27));
 	mlx_string_put(init->mlx, init->win, 10, 65, 0xffffff, "Iteration :");
 	mlx_string_put(init->mlx, init->win, 125, 65, 0xffffff,
 		ft_itoa(init->iter));

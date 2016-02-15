@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 12:51:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/12 19:42:32 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/15 19:33:55 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void		draw_mandel(t_env *init, int x, int y)
 	double	tmp;
 	double	i;
 
-	init->cr = x / (init->zoomx / (init->x2 - init->x1)) + init->x1
+	init->cr = x / (init->width / ((init->x2 - init->x1))) + init->x1
 	+ init->movex;
-	init->ci = y / (init->zoomy / (init->y2 - init->y1)) + init->y1
+	init->ci = y / (init->height / (init->y2 - init->y1)) + init->y1
 	+ init->movey;
+	init->cr *= 1.5;
+	init->ci *= 1.5;
 	init->zr = 0;
 	init->zi = 0;
 	i = 0;
@@ -43,9 +45,9 @@ void		draw_julia(t_env *init, int x, int y)
 	double	tmp;
 	int		i;
 
-	init->zr = x / (init->zoomx / (init->x2 - init->x1)) + init->x1
+	init->zr = x / (init->width / (init->x2 - init->x1)) + init->x1
     + init->movex;
-	init->zi = y / (init->zoomy / (init->y2 - init->y1)) + init->y1
+	init->zi = y / (init->height / (init->y2 - init->y1)) + init->y1
     + init->movey;
 	init->zr *= 2;
 	init->zi *= 2;
@@ -71,10 +73,10 @@ static	int	sierp(t_env *init, int i, double xy[2], double s[2])
 	int	j;
 
 	j = 1;
-	while (j * s[0] <= init->width || j * s[1] <= init->height)
+	while (j * s[0] <= init->width)
 	{
 		k = 1;
-		while (k * s[0] <= init->width || k * s[1] <= init->height)
+		while (k * s[0] <= init->width)
 		{
 			if (init->zr >= s[0] * k && init->zr <= s[0] * (2 + k - 1)
 			&& init->zi >= s[1] * j && init->zi <= s[1] * (2 + j - 1))
@@ -96,16 +98,18 @@ void		draw_sierp(t_env *init, double x, double y)
 	double	xy[2];
 
 	i = 0;
-	init->zr = x / (init->zoomx / (init->x2 - init->x1)) + init->x1
+	init->zr = x / (init->width / (init->x2 - init->x1)) + init->x1
 	+ init->movex;
-	init->zi = y / (init->zoomy / (init->y2 - init->y1)) + init->y1
+	init->zi = y / (init->height / (init->y2 - init->y1)) + init->y1
 	+ init->movey;
 	init->zr *= 600;
 	init->zi *= 600;
+	s[0] = init->width * 3;
+	s[1] = init->height * 3;
 	while (i <= init->iter / 10)
 	{
-		s[0] = (init->width / pow(3, i));
-		s[1] = (init->height / pow(3, i));
+		s[0] = s[0] / 3;
+		s[1] = s[1] / 3;
 		xy[0] = x;
 		xy[1] = y;
 		if (sierp(init, i, xy, s) == 1)

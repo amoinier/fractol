@@ -6,11 +6,12 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 18:15:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/15 19:49:52 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/15 21:03:14 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 static	void	zoomless(t_env *init, double scal[2])
 {
@@ -23,22 +24,20 @@ static	void	zoomless(t_env *init, double scal[2])
 void			zoom(t_env *init, int button, int x, int y)
 {
 	double tmp;
-	double newx;
-	double newy;
 	double scal[2];
 
-	newx = x / (init->width / (init->x2 - init->x1)) + init->x1;
-	newy = y / (init->height / (init->y2 - init->y1)) + init->y1;
+	init->cr = x / (init->width / (init->x2 - init->x1)) + init->x1;
+	init->ci = y / (init->height / (init->y2 - init->y1)) + init->y1;
 	scal[0] = (init->x2 - init->x1);
 	scal[1] = (init->y2 - init->y1);
 	if (button == 5 || button == 116)
 	{
 		tmp = init->x1;
-		init->x1 = (newx + (init->x2 + init->x1) / 2) / 2 - (scal[0] * 0.4);
-		init->x2 = (newx + (init->x2 + tmp) / 2) / 2 + (scal[0] * 0.4);
+		init->x1 = (init->cr + (init->x2 + init->x1) / 2) / 2 - (scal[0] * 0.4);
+		init->x2 = (init->cr + (init->x2 + tmp) / 2) / 2 + (scal[0] * 0.4);
 		tmp = init->y1;
-		init->y1 = (newy + (init->y2 + init->y1) / 2) / 2 - (scal[1] * 0.4);
-		init->y2 = (newy + (init->y2 + tmp) / 2) / 2 + (scal[1] * 0.4);
+		init->y1 = (init->ci + (init->y2 + init->y1) / 2) / 2 - (scal[1] * 0.4);
+		init->y2 = (init->ci + (init->y2 + tmp) / 2) / 2 + (scal[1] * 0.4);
 		init->zoom *= 1.27;
 	}
 	if (button == 4 || button == 121)
@@ -48,11 +47,10 @@ void			zoom(t_env *init, int button, int x, int y)
 	}
 }
 
-
 void			keypadcode_col(int keycode, t_env *init)
 {
 	if (keycode == 82)
-		init->col = 0xffffff + 33333333;
+		init->col = 0xfff0ff;
 	if (keycode == 83)
 		init->col = 777777;
 	if (keycode == 84)

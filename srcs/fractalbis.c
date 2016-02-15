@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 18:36:26 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/15 19:08:31 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/15 21:07:23 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_burning(t_env *init, int x, int y)
 		pixel_put_image(init, x, y, i * init->col);
 }
 
-void	draw_fakenewton(t_env *init, int x, int y)
+void	draw_douady(t_env *init, int x, int y)
 {
 	double	tmp;
 	double	i;

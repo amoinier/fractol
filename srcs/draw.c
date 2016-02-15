@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 12:51:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/15 19:33:55 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/15 21:27:25 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void		draw_julia(t_env *init, int x, int y)
 	int		i;
 
 	init->zr = x / (init->width / (init->x2 - init->x1)) + init->x1
-    + init->movex;
+	+ init->movex;
 	init->zi = y / (init->height / (init->y2 - init->y1)) + init->y1
-    + init->movey;
+	+ init->movey;
 	init->zr *= 2;
 	init->zi *= 2;
 	init->cr = init->julx;
@@ -123,25 +123,24 @@ void		draw(t_env *init)
 	int	i;
 	int	j;
 
-	i = 0;
 	j = 0;
-	while (i <= init->width)
+	while (j <= init->height)
 	{
-		j = 0;
-		while (j <= init->height)
+		i = 0;
+		while (i <= init->width)
 		{
 			if (ft_strequ(init->fract, "julia"))
 				draw_julia(init, i, j);
 			if (ft_strequ(init->fract, "mandel"))
 				draw_mandel(init, i, j);
 			if (ft_strequ(init->fract, "douady"))
-				draw_fakenewton(init, i, j);
+				draw_douady(init, i, j);
 			if (ft_strequ(init->fract, "burning"))
 				draw_burning(init, i, j);
 			if (ft_strequ(init->fract, "sierp"))
 				draw_sierp(init, i, j);
-			j++;
+			i++;
 		}
-		i++;
+		j++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/15 15:27:13 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/15 20:44:14 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				key_hook(int keycode, t_env *init)
 		mlx_destroy_window(init->mlx, init->win);
 		exit(0);
 	}
-		keypadcode_col(keycode, init);
+	keypadcode_col(keycode, init);
 	zoom(init, keycode, init->width / 2, init->height / 2);
 	if (init->iter > 0)
 		if (keycode == 78)

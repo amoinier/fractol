@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 12:51:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/15 21:27:25 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/16 12:53:55 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void		draw_mandel(t_env *init, int x, int y)
 {
 	double	tmp;
 	double	i;
+	double	xscal;
+	double	yscal;
 
-	init->cr = x / (init->width / ((init->x2 - init->x1))) + init->x1
-	+ init->movex;
-	init->ci = y / (init->height / (init->y2 - init->y1)) + init->y1
-	+ init->movey;
+	xscal = (init->width / (init->x2 - init->x1));
+	yscal = (init->height / (init->y2 - init->y1));
+	init->cr = x / xscal + init->x1 + init->movex;
+	init->ci = y / yscal + init->y1 + init->movey;
 	init->cr *= 1.5;
 	init->ci *= 1.5;
 	init->zr = 0;
@@ -44,11 +46,13 @@ void		draw_julia(t_env *init, int x, int y)
 {
 	double	tmp;
 	int		i;
+	double	xscal;
+	double	yscal;
 
-	init->zr = x / (init->width / (init->x2 - init->x1)) + init->x1
-	+ init->movex;
-	init->zi = y / (init->height / (init->y2 - init->y1)) + init->y1
-	+ init->movey;
+	xscal = (init->width / (init->x2 - init->x1));
+	yscal = (init->height / (init->y2 - init->y1));
+	init->zr = x / xscal + init->x1 + init->movex;
+	init->zi = y / yscal + init->y1 + init->movey;
 	init->zr *= 2;
 	init->zi *= 2;
 	init->cr = init->julx;
@@ -96,12 +100,14 @@ void		draw_sierp(t_env *init, double x, double y)
 	int		i;
 	double	s[2];
 	double	xy[2];
+	double	xscal;
+	double	yscal;
 
 	i = 0;
-	init->zr = x / (init->width / (init->x2 - init->x1)) + init->x1
-	+ init->movex;
-	init->zi = y / (init->height / (init->y2 - init->y1)) + init->y1
-	+ init->movey;
+	xscal = (init->width / (init->x2 - init->x1));
+	yscal = (init->height / (init->y2 - init->y1));
+	init->zr = x / xscal + init->x1 + init->movex;
+	init->zi = y / yscal + init->y1 + init->movey;
 	init->zr *= 600;
 	init->zi *= 600;
 	s[0] = init->width * 3;
@@ -131,13 +137,13 @@ void		draw(t_env *init)
 		{
 			if (ft_strequ(init->fract, "julia"))
 				draw_julia(init, i, j);
-			if (ft_strequ(init->fract, "mandel"))
+			if (ft_strequ(init->fract, "mandelbrot"))
 				draw_mandel(init, i, j);
 			if (ft_strequ(init->fract, "douady"))
 				draw_douady(init, i, j);
-			if (ft_strequ(init->fract, "burning"))
+			if (ft_strequ(init->fract, "burningship"))
 				draw_burning(init, i, j);
-			if (ft_strequ(init->fract, "sierp"))
+			if (ft_strequ(init->fract, "sierpinski"))
 				draw_sierp(init, i, j);
 			i++;
 		}

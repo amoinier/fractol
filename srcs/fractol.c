@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:09:53 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/15 20:07:50 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/16 12:53:35 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,21 @@ static	void	ft_initenv(t_env *init, char *av)
 
 int				control_param(char *av)
 {
-	if (ft_strequ(av, "mandel") || ft_strequ(av, "julia") ||
-	ft_strequ(av, "sierp") || ft_strequ(av, "douady") ||
-	ft_strequ(av, "burning"))
+	if (ft_strequ(av, "mandelbrot") || ft_strequ(av, "julia") ||
+	ft_strequ(av, "sierpinski") || ft_strequ(av, "douady") ||
+	ft_strequ(av, "burningship"))
 		return (1);
 	else
 		return (0);
+}
+
+static	void	mlx_var(t_env *init)
+{
+	mlx_hook(init->win, 2, 0, key_hook, init);
+	mlx_hook(init->win, 6, 0, mouse_julia, init);
+	mlx_hook(init->win, 4, 0, mouse_hook, init);
+	mlx_expose_hook(init->win, expose_hook, init);
+	mlx_loop(init->mlx);
 }
 
 int				main(int ac, char **av)
@@ -70,15 +79,13 @@ int				main(int ac, char **av)
 			ft_initenv(init, av[1]);
 			init->win = mlx_new_window(init->mlx, init->width, init->height,
 			"Fractol");
-			mlx_hook(init->win, 2, 0, key_hook, init);
-			if (ft_strequ(av[1], "julia"))
-				mlx_hook(init->win, 6, 0, mouse_julia, init);
-			mlx_hook(init->win, 4, 0, mouse_hook, init);
-			mlx_expose_hook(init->win, expose_hook, init);
-			mlx_loop(init->mlx);
+			mlx_var(init);
 		}
 		else
-			ft_putstr("USAGE : mandel - julia - douady - burning - sierp\n");
+		{
+			ft_putstr("USAGE : mandelbrot - julia - douady - ");
+			ft_putstr("burningship - sierpinski\n");
+		}
 	}
 	else
 		ft_putstr("USAGE : 1 param\n");

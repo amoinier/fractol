@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 18:36:26 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/15 21:07:23 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/16 12:31:02 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void	draw_burning(t_env *init, int x, int y)
 {
 	double	tmp;
 	double	i;
+	double	xscal;
+	double	yscal;
 
-	init->cr = x / (init->width / (init->x2 - init->x1)) + init->x1
-	+ init->movex;
-	init->ci = y / (init->height / (init->y2 - init->y1)) + init->y1
-	+ init->movey;
+	xscal = (init->width / (init->x2 - init->x1));
+	yscal = (init->height / (init->y2 - init->y1));
+	init->cr = x / xscal + init->x1 + init->movex;
+	init->ci = y / yscal + init->y1 + init->movey;
 	init->cr *= 1.5;
 	init->ci *= 1.5;
 	init->zr = 0;
@@ -44,11 +46,13 @@ void	draw_douady(t_env *init, int x, int y)
 {
 	double	tmp;
 	double	i;
+	double	xscal;
+	double	yscal;
 
-	init->zr = x / (init->width / (init->x2 - init->x1)) + init->x1
-	+ init->movex;
-	init->zi = y / (init->height / (init->y2 - init->y1)) + init->y1
-	+ init->movey;
+	xscal = (init->width / (init->x2 - init->x1));
+	yscal = (init->height / (init->y2 - init->y1));
+	init->zr = x / xscal + init->x1 + init->movex;
+	init->zi = y / yscal + init->y1 + init->movey;
 	init->cr = -0.12;
 	init->ci = 0.75;
 	i = 0;

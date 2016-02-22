@@ -6,12 +6,11 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 12:51:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/16 12:53:55 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/16 17:09:15 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <math.h>
 
 void		draw_mandel(t_env *init, int x, int y)
 {
@@ -22,10 +21,8 @@ void		draw_mandel(t_env *init, int x, int y)
 
 	xscal = (init->width / (init->x2 - init->x1));
 	yscal = (init->height / (init->y2 - init->y1));
-	init->cr = x / xscal + init->x1 + init->movex;
-	init->ci = y / yscal + init->y1 + init->movey;
-	init->cr *= 1.5;
-	init->ci *= 1.5;
+	init->cr = (x / xscal + init->x1 + init->movex) * 1.5;
+	init->ci = (y / yscal + init->y1 + init->movey) * 1.5;
 	init->zr = 0;
 	init->zi = 0;
 	i = 0;
@@ -51,10 +48,8 @@ void		draw_julia(t_env *init, int x, int y)
 
 	xscal = (init->width / (init->x2 - init->x1));
 	yscal = (init->height / (init->y2 - init->y1));
-	init->zr = x / xscal + init->x1 + init->movex;
-	init->zi = y / yscal + init->y1 + init->movey;
-	init->zr *= 2;
-	init->zi *= 2;
+	init->zr = (x / xscal + init->x1 + init->movex) * 2;
+	init->zi = (y / yscal + init->y1 + init->movey) * 2;
 	init->cr = init->julx;
 	init->ci = init->july;
 	i = 0;
@@ -106,10 +101,8 @@ void		draw_sierp(t_env *init, double x, double y)
 	i = 0;
 	xscal = (init->width / (init->x2 - init->x1));
 	yscal = (init->height / (init->y2 - init->y1));
-	init->zr = x / xscal + init->x1 + init->movex;
-	init->zi = y / yscal + init->y1 + init->movey;
-	init->zr *= 600;
-	init->zi *= 600;
+	init->zr = (x / xscal + init->x1 + init->movex) * 600;
+	init->zi = (y / yscal + init->y1 + init->movey) * 600;
 	s[0] = init->width * 3;
 	s[1] = init->height * 3;
 	while (i <= init->iter / 10)

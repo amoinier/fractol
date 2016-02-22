@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 18:36:26 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/16 12:31:02 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/16 16:15:59 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void	draw_burning(t_env *init, int x, int y)
 
 	xscal = (init->width / (init->x2 - init->x1));
 	yscal = (init->height / (init->y2 - init->y1));
-	init->cr = x / xscal + init->x1 + init->movex;
-	init->ci = y / yscal + init->y1 + init->movey;
-	init->cr *= 1.5;
-	init->ci *= 1.5;
+	init->cr = (x / xscal + init->x1 + init->movex) * 1.5;
+	init->ci = (y / yscal + init->y1 + init->movey) * 1.5;
 	init->zr = 0;
 	init->zi = 0;
 	i = 0;

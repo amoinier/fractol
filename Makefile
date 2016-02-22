@@ -6,7 +6,7 @@
 #    By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 12:02:38 by amoinier          #+#    #+#              #
-#    Updated: 2016/02/15 15:11:57 by amoinier         ###   ########.fr        #
+#    Updated: 2016/02/16 17:31:56 by amoinier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBCC =		$(addprefix $(ODIR),$(OBJS))
 
 NORM =		$(SRCC) $(INCC) $(EXEC)
 
-FLAG =		-Ofast -Wall -Wextra -Werror -I$(IDIR)
+FLAG =		-Wall -Wextra -Werror -I$(IDIR)
 
 all: $(NAME)
 

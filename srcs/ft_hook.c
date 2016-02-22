@@ -6,7 +6,7 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 19:12:54 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/16 12:45:30 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/16 14:37:57 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int				key_hook(int keycode, t_env *init)
 	}
 	keypadcode_col(keycode, init);
 	change_fractal(keycode, init);
+	new_window(keycode);
 	zoom(init, keycode, init->width / 2, init->height / 2);
 	if (init->iter > 0)
 		if (keycode == 78)

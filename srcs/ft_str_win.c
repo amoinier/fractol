@@ -6,12 +6,11 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 17:02:13 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/16 12:09:10 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/16 17:08:59 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <math.h>
 
 void	ft_str_win(t_env *init)
 {

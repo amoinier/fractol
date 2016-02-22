@@ -6,19 +6,22 @@
 /*   By: amoinier <amoinier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 18:15:29 by amoinier          #+#    #+#             */
-/*   Updated: 2016/02/16 12:58:34 by amoinier         ###   ########.fr       */
+/*   Updated: 2016/02/16 17:37:25 by amoinier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 static	void	zoomless(t_env *init, double scal[2])
 {
-	init->x1 = init->x1 - (scal[0] * 0.4);
-	init->x2 = init->x2 + (scal[0] * 0.4);
-	init->y1 = init->y1 - (scal[1] * 0.4);
-	init->y2 = init->y2 + (scal[1] * 0.4);
+	int	tmp;
+
+	tmp = init->x1;
+	init->x1 = (init->cr - (scal[0] * 0.8));
+	init->x2 = (init->cr + (scal[0] * 0.8));
+	tmp = init->y1;
+	init->y1 = (init->ci - (scal[1] * 0.8));
+	init->y2 = (init->ci + (scal[1] * 0.8));
 }
 
 void			zoom(t_env *init, int button, int x, int y)
@@ -26,24 +29,36 @@ void			zoom(t_env *init, int button, int x, int y)
 	double tmp;
 	double scal[2];
 
-	init->cr = x / (init->width / (init->x2 - init->x1)) + init->x1;
-	init->ci = y / (init->height / (init->y2 - init->y1)) + init->y1;
 	scal[0] = (init->x2 - init->x1);
 	scal[1] = (init->y2 - init->y1);
+	init->cr = x / (init->width / scal[0]) + init->x1;
+	init->ci = y / (init->height / scal[1]) + init->y1;
 	if (button == 5 || button == 116)
 	{
 		tmp = init->x1;
-		init->x1 = (init->cr + (init->x2 + init->x1) / 2) / 2 - (scal[0] * 0.4);
-		init->x2 = (init->cr + (init->x2 + tmp) / 2) / 2 + (scal[0] * 0.4);
+		init->x1 = init->cr - (scal[0] * 0.4);
+		init->x2 = init->cr + (scal[0] * 0.4);
 		tmp = init->y1;
-		init->y1 = (init->ci + (init->y2 + init->y1) / 2) / 2 - (scal[1] * 0.4);
-		init->y2 = (init->ci + (init->y2 + tmp) / 2) / 2 + (scal[1] * 0.4);
+		init->y1 = init->ci - (scal[1] * 0.4);
+		init->y2 = init->ci + (scal[1] * 0.4);
 		init->zoom *= 0.80;
 	}
 	if (button == 4 || button == 121)
 	{
 		zoomless(init, scal);
-		init->zoom *= 1.70;
+		init->zoom *= 1.50;
+	}
+}
+
+void			new_window(int keycode)
+{
+	t_env *bis;
+
+	if (keycode == 256)
+	{
+		if (!(bis = (t_env *)malloc(sizeof(*bis))))
+			error();
+		mlx_var(bis, "");
 	}
 }
 
@@ -58,13 +73,16 @@ void			change_fractal(int keycode, t_env *init)
 	if (keycode == 21)
 		init->fract = "burningship";
 	if (keycode == 23)
+	{
+		init->iter = 30;
 		init->fract = "sierpinski";
+	}
 }
 
 void			keypadcode_col(int keycode, t_env *init)
 {
 	if (keycode == 82)
-		init->col = 0xfff0ff;
+		init->col = 0x0f0fff;
 	if (keycode == 83)
 		init->col = 777777;
 	if (keycode == 84)
